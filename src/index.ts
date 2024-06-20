@@ -26,7 +26,7 @@ server.get("/ping", async (request, reply) => {
 server.get("/usuario", async (request, reply) => {
   try {
     const users = await db("Usuario").select("*").orderBy("id_usuario", "asc");
-    return reply.send(users?.[0]);
+    return reply.send(users?.[1]);
   } catch (error) {
     console.error("Error fetching users:", error);
     return reply.status(500).send("Erro ao buscar usuários");
@@ -44,9 +44,37 @@ server.post("/usuario", async (request, reply) => {
   }
 });
 
+//pesquisa
+
+server.get("/pesquisa", async (request, reply) => {
+  try {
+    const users = await db("Pesquisa")
+      .select("*")
+      .orderBy("id_pesquisa", "asc");
+    return reply.send(users?.[1]);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return reply.status(500).send("Erro ao buscar pesuisas");
+  }
+});
+
+// Rota para cadastrar pesquisa
+server.post("/pesquisa", async (request, reply) => {
+  try {
+    const { nome_pesquisa } = request.body;
+    await db("Pesquisa").insert({
+      nome_pesquisa,
+    });
+    return reply.send({ message: "Pesquisa cadastrada com sucesso" });
+  } catch (error) {
+    console.error("Error inserting research:", error);
+    return reply.status(500).send("Erro ao inserir pesquisa");
+  }
+});
+
 const startServer = async () => {
   try {
-    await server.listen({ port: 8080, host: '0.0.0.0' }); // Adicione host 0.0.0.0 para ouvir em todas as interfaces de rede
+    await server.listen({ port: 8080, host: "0.0.0.0" }); // Adicione host 0.0.0.0 para ouvir em todas as interfaces de rede
     console.log(`Server listening at http://localhost:8080`);
   } catch (err) {
     console.error(err);
