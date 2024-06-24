@@ -72,6 +72,25 @@ server.post("/pesquisa", async (request, reply) => {
   }
 });
 
+// Rota para buscar detalhes da seção
+server.get("/secao/:id", async (request, reply) => {
+  try {
+    const { id } = request.params;
+
+    // Busca os detalhes da seção pelo id
+    const secao = await db("Secao").where({ id_secao: id }).first("id_secao", "titulo", "descricao");
+    if (!secao) {
+      return reply.status(404).send({ message: "Seção não encontrada" });
+    }
+
+    return reply.send(secao);
+  } catch (error) {
+    console.error("Error fetching section details:", error);
+    return reply.status(500).send("Erro ao buscar detalhes da seção");
+  }
+});
+
+
 const startServer = async () => {
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" }); // Adicione host 0.0.0.0 para ouvir em todas as interfaces de rede
