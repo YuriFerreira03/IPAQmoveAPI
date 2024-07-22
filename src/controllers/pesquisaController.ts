@@ -29,3 +29,17 @@ export const createPesquisa = async (request: FastifyRequest<{ Body: { nome_pesq
     return reply.status(500).send('Erro ao inserir pesquisa');
   }
 };
+
+export const searchPesquisa = async (request: FastifyRequest<{ Querystring: { query: string } }>, reply: FastifyReply) => {
+  try {
+    const { query } = request.query;
+    const results = await db('Pesquisa')
+      .where('nome_pesq', 'like', `%${query}%`)
+      .select('nome_pesq', 'fk_Usuario_id_usuario', 'fk_Questionario_id_quest', 'localizacao', 'instituicao');
+    
+    return reply.send(results);
+  } catch (error) {
+    console.error('Erro ao buscar pesquisas:', error);
+    return reply.status(500).send('Erro ao buscar pesquisas');
+  }
+};
