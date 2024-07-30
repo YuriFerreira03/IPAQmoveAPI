@@ -7,14 +7,14 @@ export const getUser = async (request: FastifyRequest, reply: FastifyReply) => {
 
 export const createUser = async (
   request: FastifyRequest<{
-    Body: { name: string; type: string; locality?: string };
+    Body: { name: string; type: string; locality: string };
   }>,
   reply: FastifyReply
 ) => {
   try {
     console.log("Recebendo dados do frontend:", request.body);
 
-    const { name, type, locality = "Desconhecida" } = request.body;
+    const { name, type, locality } = request.body;
 
     console.log(`Nome: ${name}, Tipo: ${type}, Localidade: ${locality}`);
     console.log("Tentando inserir usuário no banco de dados...");
