@@ -31,22 +31,12 @@ export const createUser = async (
   }
 };
 
-export const salvarLocalizacao = async (
-  request: FastifyRequest<{ Body: { localizacao: string } }>,
-  reply: FastifyReply
-) => {
+export const getLocalizacao = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
-    const { localizacao } = request.body;
-    console.log("Recebendo localização:", localizacao);
-
-    const [locationId] = await db("Localizacoes")
-      .insert({ localizacao })
-      .returning("id");
-
-    console.log("Localização salva com sucesso:", locationId);
-    return reply.send({ message: "Localização salva com sucesso" });
+    const localizacao = await db('Usuario').select('localidade').where({ id_usuario: 1 }).first(); // Substitua '1' pelo ID correto do usuário
+    reply.send({ localizacao: localizacao.localidade });
   } catch (error) {
-    console.error("Erro ao salvar localização:", error);
-    return reply.status(500).send("Erro ao salvar localização");
+    console.error("Erro ao buscar dados da localização:", error);
+    reply.status(500).send("Erro ao buscar dados da localização!");
   }
 };
