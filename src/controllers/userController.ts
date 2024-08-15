@@ -1,6 +1,15 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import db from "../db/connection";
 
+// Define the types for request parameters and body
+interface UpdateLocalizacaoParams {
+  id_usuario: number;
+}
+
+interface UpdateLocalizacaoBody {
+  locality: string;
+}
+
 export const getUser = async (request: FastifyRequest, reply: FastifyReply) => {
   return reply.send({ message: "Rota GET /Usuario funcionando" });
 };
@@ -24,19 +33,9 @@ export const createUser = async (
       .returning("id_usuario");
 
     console.log("Usuário inserido com sucesso");
-    return reply.send({ message: "Usuário inserido com sucesso" });
+    return reply.send({ message: "Usuário inserido com sucesso", userId });
   } catch (error) {
     console.error("Erro ao inserir usuário:", error);
     return reply.status(500).send("Erro ao inserir usuário");
-  }
-};
-
-export const getLocalizacao = async (request: FastifyRequest, reply: FastifyReply) => {
-  try {
-    const localizacao = await db('Usuario').select('localidade').where({ id_usuario: 1 }).first(); // Substitua '1' pelo ID correto do usuário
-    reply.send({ localizacao: localizacao.localidade });
-  } catch (error) {
-    console.error("Erro ao buscar dados da localização:", error);
-    reply.status(500).send("Erro ao buscar dados da localização!");
   }
 };
