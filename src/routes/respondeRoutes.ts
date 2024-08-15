@@ -1,6 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { saveResposta } from "../controllers/respondeController";
+import { respondeController } from "../controllers/respondeController";
 
-export async function respondeRoutes(fastify: FastifyInstance) {
-  fastify.post("/responde", saveResposta);
-}
+const RespondeRoutes = async (server: FastifyInstance) => {
+  server.post("/Resposta", respondeController);
+};
+
+export default RespondeRoutes;

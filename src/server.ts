@@ -5,7 +5,7 @@ import userRoutes from "./routes/userRoutes";
 import pesquisaRoutes from "./routes/pesquisaRoutes";
 import { secaoRoutes } from "./routes/secaoRoutes";
 import { questaoRoutes } from "./routes/questaoRoutes";
-import { respondeRoutes } from "./routes/respondeRoutes";
+import respondeRoutes  from "./routes/respondeRoutes";
 
 
 const server = fastify();
@@ -41,7 +41,7 @@ server.get("/test-db", async (request, reply) => {
 const startServer = async () => {
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });
-    console.log(`Server listening at http://200.18.142.10`);
+    console.log(`Server listening at http://192.168.1.66`);
   } catch (err) {
     console.error("Erro ao iniciar o servidor:", err);
     process.exit(1);
