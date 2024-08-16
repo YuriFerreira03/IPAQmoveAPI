@@ -1,7 +1,17 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
 import db from '../db/connection';
 
-export const createPesquisa = async (request: FastifyRequest<{ Body: { nome_pesquisa: string; fk_Usuario_id_usuario: number; fk_Questionario_id_quest: number; localizacao: string; instituicao: string } }>, reply: FastifyReply) => {
+export const createPesquisa = async (
+  request: FastifyRequest<{ 
+  Body: { 
+  nome_pesquisa: string; 
+  fk_Usuario_id_usuario: number; 
+  fk_Questionario_id_quest: number;
+  localizacao: string; 
+  instituicao: string 
+  } 
+  }>, 
+  reply: FastifyReply) => {
   try {
     console.log('Recebendo dados do frontend:', request.body);
 
