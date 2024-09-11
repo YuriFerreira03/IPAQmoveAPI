@@ -16,20 +16,20 @@ export const getUser = async (request: FastifyRequest, reply: FastifyReply) => {
 
 export const createUser = async (
   request: FastifyRequest<{
-    Body: { name: string; type: string; locality: string };
+    Body: { name: string; type: string; locality: string; email: string; password: string };
   }>,
   reply: FastifyReply
 ) => {
   try {
     console.log("Recebendo dados do frontend:", request.body);
 
-    const { name, type, locality } = request.body;
+    const { name, type, locality, email, password } = request.body;
 
-    console.log(`Nome: ${name}, Tipo: ${type}, Localidade: ${locality}`);
+    console.log(`Nome: ${name}, Tipo: ${type}, Localidade: ${locality}, Email: ${email}, Localidade: ${password}`);
     console.log("Tentando inserir usuário no banco de dados...");
 
     const [userId] = await db("Usuario")
-      .insert({ nome: name, tipo: type, localidade: locality })
+      .insert({ nome: name, tipo: type, localidade: locality, email: email, senha: password })
       .returning("id_usuario");
 
     console.log("Usuário inserido com sucesso");

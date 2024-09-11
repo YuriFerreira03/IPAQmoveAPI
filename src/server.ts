@@ -8,6 +8,7 @@ import { questaoRoutes } from "./routes/questaoRoutes";
 import respondeRoutes  from "./routes/respondeRoutes";
 import perguntas_geraisRoutes from "./routes/perguntas_geraisRoutes"
 import Projeto_VinculadoRoutes from "./routes/Projeto_VinculadoRoutes"
+import Login from "./routes/userLoginRoutes";
 
 
 const server = fastify();
@@ -23,7 +24,8 @@ server.register(secaoRoutes);
 server.register(questaoRoutes);
 server.register(respondeRoutes);
 server.register(perguntas_geraisRoutes);
-server.register(Projeto_VinculadoRoutes)
+server.register(Projeto_VinculadoRoutes);
+server.register(Login);
 
 server.get("/ping", async (request, reply) => {
   return "Lamoia\n";
@@ -45,7 +47,7 @@ server.get("/test-db", async (request, reply) => {
 const startServer = async () => {
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });
-    console.log(`Server listening at http://192.168.1.65`);
+    console.log(`Server listening at http://192.168.0.106`);
   } catch (err) {
     console.error("Erro ao iniciar o servidor:", err);
     process.exit(1);
