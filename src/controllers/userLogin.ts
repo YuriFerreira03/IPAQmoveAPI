@@ -33,13 +33,15 @@ export const loginUser = async (
       return reply.status(401).send({ message: "Senha incorreta" });
     }
 
-    // Aqui pode gerar um token de autenticação (JWT)
-    // const token = generateJwtToken(user.id_usuario);
-
-    return reply.send({ message: "Login bem-sucedido", userId: user.id_usuario });
+    // Retorna o nome e a localidade junto com o userId
+    return reply.send({
+      message: "Login bem-sucedido",
+      userId: user.id_usuario,
+      name: user.nome, // Retornando o nome do usuário
+      locality: user.localidade, // Retornando a localidade do usuário
+    });
   } catch (error) {
     console.error("Erro ao realizar login:", error);
     return reply.status(500).send({ message: "Erro ao realizar login" });
   }
 };
-
