@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import db from "../db/connection";
+import bcrypt from "bcryptjs";  // Importa o bcryptjs
 
 // Define the types for request parameters and body
 interface UpdateLocalizacaoParams {
@@ -25,14 +26,17 @@ export const createUser = async (
 
     const { name, type, locality, email, password } = request.body;
 
-    console.log(`Nome: ${name}, Tipo: ${type}, Localidade: ${locality}, Email: ${email}, Localidade: ${password}`);
+    // Encripta a senha com bcrypt
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    console.log(`Nome: ${name}, Tipo: ${type}, Localidade: ${locality}, Email: ${email}, Senha: ${hashedPassword}`);
     console.log("Tentando inserir usuário no banco de dados...");
 
     const [userId] = await db("Usuario")
-      .insert({ nome: name, tipo: type, localidade: locality, email: email, senha: password })
+      .insert({ nome: name, tipo: type, localidade: locality, email: email, senha: hashedPassword }) // Insere a senha encriptada
       .returning("id_usuario");
 
-    console.log("Usuário inserido com sucesso");
+    console.log("Usuário inserido com sucesso!");
     return reply.send({ message: "Usuário inserido com sucesso", userId });
   } catch (error) {
     console.error("Erro ao inserir usuário:", error);

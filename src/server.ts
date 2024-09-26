@@ -47,7 +47,7 @@ server.get("/test-db", async (request, reply) => {
 const startServer = async () => {
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });
-    console.log(`Server listening at http://192.168.0.106`);
+    console.log(`Server listening at http://192.168.0.98`);
   } catch (err) {
     console.error("Erro ao iniciar o servidor:", err);
     process.exit(1);
