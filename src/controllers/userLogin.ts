@@ -1,5 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
 import db from "../db/connection";
+import bcrypt from "bcryptjs"; // Importa o bcryptjs
 
 // Define os tipos para o corpo da requisição
 interface LoginBody {
@@ -14,7 +15,7 @@ export const loginUser = async (
   try {
     const { email, password } = request.body;
 
-    console.log("TESTANDO A CONEXAO");
+    console.log("Testando a conexão do LOGIN");
 
     // Verifica se o e-mail e senha foram fornecidos
     if (!email || !password) {
@@ -28,8 +29,9 @@ export const loginUser = async (
       return reply.status(401).send({ message: "Usuário não encontrado" });
     }
 
-    // Compara a senha sem usar criptografia (texto plano)
-    if (password !== user.senha) {
+    // Compara a senha criptografada
+    const isPasswordValid = await bcrypt.compare(password, user.senha);
+    if (!isPasswordValid) {
       return reply.status(401).send({ message: "Senha incorreta" });
     }
 
