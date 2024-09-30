@@ -8,7 +8,6 @@ export const respondeController = async (
       fk_Questao_id_questao: number;
       respostas_abertas: string;
       respostas_fechadas: number; // Ajustado para refletir o tipo tinyint
-      datahora: string; // Ajustado para refletir o tipo date
       resposta: string;
     };
   }>,
@@ -22,7 +21,6 @@ export const respondeController = async (
       fk_Questao_id_questao,
       respostas_abertas,
       respostas_fechadas,
-      datahora,
       resposta,
     } = request.body;
 
@@ -30,7 +28,6 @@ export const respondeController = async (
     console.log(`fk_Questao_id_questao: ${fk_Questao_id_questao}`);
     console.log(`Respostas Abertas: ${respostas_abertas}`);
     console.log(`Respostas Fechadas: ${respostas_fechadas}`);
-    console.log(`Data/Hora: ${datahora}`);
     console.log(`Resposta: ${resposta}`);
     console.log("Tentando inserir dados na tabela Responde...");
 
@@ -39,7 +36,6 @@ export const respondeController = async (
       fk_Questao_id_questao,
       respostas_abertas,
       respostas_fechadas,
-      datahora,
       resposta,
     });
 
