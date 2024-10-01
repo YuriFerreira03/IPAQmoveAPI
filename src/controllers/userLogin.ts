@@ -6,6 +6,7 @@ import bcrypt from "bcryptjs"; // Importa o bcryptjs
 interface LoginBody {
   email: string;
   password: string;
+  type: string;
 }
 
 export const loginUser = async (
@@ -13,20 +14,22 @@ export const loginUser = async (
   reply: FastifyReply
 ) => {
   try {
-    const { email, password } = request.body;
+    const { email, password, type } = request.body;
 
     console.log("Testando a conexão do LOGIN");
 
     // Verifica se o e-mail e senha foram fornecidos
     if (!email || !password) {
-      return reply.status(400).send({ message: "E-mail e senha são obrigatórios" });
+      return reply
+        .status(400)
+        .send({ message: "E-mail e senha são obrigatórios" });
     }
 
     // Busca o usuário pelo e-mail
     const user = await db("Usuario").where({ email }).first();
 
     if (!user) {
-      return reply.status(401).send({ message: "Usuário não encontrado" });
+      return reply.status(401).send({ message: "Email não encontrado" });
     }
 
     // Compara a senha criptografada
@@ -38,6 +41,7 @@ export const loginUser = async (
     // Retorna o nome e a localidade junto com o userId
     return reply.send({
       message: "Login bem-sucedido",
+      type: user.tipo,
       userId: user.id_usuario,
       name: user.nome, // Retornando o nome do usuário
       locality: user.localidade, // Retornando a localidade do usuário
