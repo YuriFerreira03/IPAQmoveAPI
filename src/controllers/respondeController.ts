@@ -43,11 +43,9 @@ export const respondeController = async (
     return reply.send({ message: "Resposta inserida com sucesso" });
   } catch (error) {
     console.error("Erro ao inserir resposta:", error.message || error);
-    return reply
-      .status(500)
-      .send({
-        error: "Erro ao inserir resposta",
-        details: error.message || error,
-      });
+    return reply.status(500).send({
+      error: "Erro ao inserir resposta",
+      details: error.message || error,
+    });
   }
 };
