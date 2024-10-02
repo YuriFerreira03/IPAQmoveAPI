@@ -5,11 +5,11 @@ import userRoutes from "./routes/userRoutes";
 import pesquisaRoutes from "./routes/pesquisaRoutes";
 import { secaoRoutes } from "./routes/secaoRoutes";
 import { questaoRoutes } from "./routes/questaoRoutes";
-import respondeRoutes  from "./routes/respondeRoutes";
-import perguntas_geraisRoutes from "./routes/perguntas_geraisRoutes"
-import Projeto_VinculadoRoutes from "./routes/Projeto_VinculadoRoutes"
+import respondeRoutes from "./routes/respondeRoutes";
+import perguntas_geraisRoutes from "./routes/perguntas_geraisRoutes";
+import Projeto_VinculadoRoutes from "./routes/Projeto_VinculadoRoutes";
 import Login from "./routes/userLoginRoutes";
-
+import respostasRoutes from "./routes/respostasRoutes";
 
 const server = fastify();
 
@@ -26,6 +26,7 @@ server.register(respondeRoutes);
 server.register(perguntas_geraisRoutes);
 server.register(Projeto_VinculadoRoutes);
 server.register(Login);
+server.register(respostasRoutes);
 
 server.get("/ping", async (request, reply) => {
   return "Lamoia\n";
