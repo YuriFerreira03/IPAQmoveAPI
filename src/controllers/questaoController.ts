@@ -6,7 +6,9 @@ interface QuestaoParams {
 }
 
 export const getQuestao = async (request: FastifyRequest<{ Params: QuestaoParams }>, reply: FastifyReply) => {
+
   const { id_questao } = request.params;
+  
   try {
     const questao = await db('Questao').where({ id_questao }).select('*').first();
     if (questao) {
