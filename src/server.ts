@@ -10,6 +10,12 @@ import perguntas_geraisRoutes from "./routes/perguntas_geraisRoutes";
 import Projeto_VinculadoRoutes from "./routes/Projeto_VinculadoRoutes";
 import Login from "./routes/userLoginRoutes";
 import respostasRoutes from "./routes/respostasRoutes";
+import respostaPerguntasGeraisRoutes from "./routes/respostaPerguntasGeraisRoute";
+import respostasTotaisSession1Routes  from "./routes/respostasTotaisSession1Routes";
+import respostasTotaisSession2Routes  from "./routes/respostasTotaisSession2Routes";
+import respostasTotaisSession3Routes  from "./routes/respostasTotaisSession3Routes";
+import respostasTotaisSession4Routes  from "./routes/respostasTotaisSession4Routes";
+import respostasDuracaoFrequenciaClassificacaoRoutes from "./routes/respostasDuracaoFrequenciaClassificacaoRoutes";
 
 const server = fastify();
 
@@ -27,6 +33,12 @@ server.register(perguntas_geraisRoutes);
 server.register(Projeto_VinculadoRoutes);
 server.register(Login);
 server.register(respostasRoutes);
+server.register(respostaPerguntasGeraisRoutes);
+server.register(respostasTotaisSession1Routes);
+server.register(respostasTotaisSession2Routes);
+server.register(respostasTotaisSession3Routes);
+server.register(respostasTotaisSession4Routes);
+server.register(respostasDuracaoFrequenciaClassificacaoRoutes);
 
 server.get("/ping", async (request, reply) => {
   return "Lamoia\n";
@@ -48,7 +60,7 @@ server.get("/test-db", async (request, reply) => {
 const startServer = async () => {
   try {
     await server.listen({ port: 8080, host: "0.0.0.0" });
-    console.log(`Server listening at http://192.168.0.98`);
+    console.log(`Server listening at http://192.168.0.106`);
   } catch (err) {
     console.error("Erro ao iniciar o servidor:", err);
     process.exit(1);
