@@ -11,10 +11,10 @@ import Projeto_VinculadoRoutes from "./routes/Projeto_VinculadoRoutes";
 import Login from "./routes/userLoginRoutes";
 import respostasRoutes from "./routes/respostasRoutes";
 import respostaPerguntasGeraisRoutes from "./routes/respostaPerguntasGeraisRoute";
-import respostasTotaisSession1Routes  from "./routes/respostasTotaisSession1Routes";
-import respostasTotaisSession2Routes  from "./routes/respostasTotaisSession2Routes";
-import respostasTotaisSession3Routes  from "./routes/respostasTotaisSession3Routes";
-import respostasTotaisSession4Routes  from "./routes/respostasTotaisSession4Routes";
+import respostasTotaisSession1Routes from "./routes/respostasTotaisSession1Routes";
+import respostasTotaisSession2Routes from "./routes/respostasTotaisSession2Routes";
+import respostasTotaisSession3Routes from "./routes/respostasTotaisSession3Routes";
+import respostasTotaisSession4Routes from "./routes/respostasTotaisSession4Routes";
 import respostasDuracaoFrequenciaClassificacaoRoutes from "./routes/respostasDuracaoFrequenciaClassificacaoRoutes";
 
 const server = fastify();
