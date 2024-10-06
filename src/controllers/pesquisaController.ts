@@ -63,3 +63,54 @@ export const searchPesquisa = async (
     return reply.status(500).send("Erro ao buscar pesquisas");
   }
 };
+
+export const getAllPesquisas = async (
+  request: FastifyRequest<{ Querystring: { userId: string } }>,
+  reply: FastifyReply
+) => {
+  const { userId } = request.query;
+
+  try {
+    // Retorna apenas as pesquisas do pesquisador logado
+    const pesquisas = await db("Pesquisa")
+      .join("Usuario", "Pesquisa.fk_Usuario_id_usuario", "Usuario.id_usuario")
+      .where("Usuario.id_usuario", userId) // Filtrando pelo userId do pesquisador logado
+      .select(
+        "Pesquisa.id_pesq",
+        "Pesquisa.nome_pesq",
+        "Pesquisa.localizacao",
+        "Pesquisa.instituicao",
+        "Usuario.nome as nome_pesquisador"
+      );
+
+    console.log("Pesquisas retornadas:", pesquisas); // Log para ver os resultados filtrados
+
+    return reply.send(pesquisas);
+  } catch (error) {
+    console.error("Erro ao buscar pesquisas:", error);
+    return reply.status(500).send("Erro ao buscar pesquisas");
+  }
+};
+
+export const getUsuariosByPesquisa = async (
+  request: FastifyRequest<{ Params: { nome_pesq: string } }>,
+  reply: FastifyReply
+) => {
+  const { nome_pesq } = request.params;
+
+  try {
+    const usuarios = await db("Usuario")
+      .join(
+        "Projeto_Vinculado",
+        "Usuario.id_usuario",
+        "Projeto_Vinculado.fk_Usuario_id_usuario"
+      )
+      .where("Projeto_Vinculado.nome_pesq", nome_pesq) // Filtrando pelo nome da pesquisa
+      .select("Usuario.id_usuario", "Usuario.nome", "Usuario.email");
+
+    return reply.send(usuarios);
+  } catch (error) {
+    console.error("Erro ao buscar usuários cadastrados:", error);
+    return reply.status(500).send("Erro ao buscar usuários cadastrados");
+  }
+};
