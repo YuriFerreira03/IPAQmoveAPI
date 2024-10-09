@@ -41,6 +41,7 @@ export const respostasController = async (
       .where("Responde.fk_Usuario_id_usuario", fk_Usuario_id_usuario)
       .andWhere("Responde.fk_Questao_id_questao", ">", 0) // Excluir id_questao = 0
       .andWhere("Responde.dataHora", function () {
+        // @ts-ignore
         this.select("dataHora")
           .from("Responde as r2")
           .whereRaw("r2.fk_Questao_id_questao = Responde.fk_Questao_id_questao")
@@ -58,10 +59,16 @@ export const respostasController = async (
     console.log("Respostas encontradas:", respostas);
     return reply.send({ respostas }); // Enviar as respostas
   } catch (error) {
-    console.error("Erro ao buscar respostas:", error.message || error);
+    let errorMessage = "Erro ao inserir resposta";
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    } else {
+      errorMessage += JSON.stringify(error);
+    }
+    console.error(errorMessage);
     return reply.status(500).send({
-      error: "Erro ao buscar respostas",
-      details: error.message || error,
+      error: "Erro ao inserir resposta",
+      details: errorMessage,
     });
   }
 };
