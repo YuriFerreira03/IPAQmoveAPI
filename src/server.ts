@@ -16,6 +16,7 @@ import respostasTotaisSession2Routes from "./routes/respostasTotaisSession2Route
 import respostasTotaisSession3Routes from "./routes/respostasTotaisSession3Routes";
 import respostasTotaisSession4Routes from "./routes/respostasTotaisSession4Routes";
 import respostasDuracaoFrequenciaClassificacaoRoutes from "./routes/respostasDuracaoFrequenciaClassificacaoRoutes";
+import db from "./db/connection";
 
 const server = fastify();
 

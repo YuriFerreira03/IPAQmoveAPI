@@ -58,12 +58,16 @@ export const createPerguntaGeral = async (
     console.log("Dados inseridos com sucesso na tabela Perguntas_gerais");
     return reply.send({ message: "Resposta inserida com sucesso" });
   } catch (error) {
-    console.error("Erro ao inserir resposta:", error.message || error);
-    return reply
-      .status(500)
-      .send({
-        error: "Erro ao inserir resposta",
-        details: error.message || error,
-      });
+    let errorMessage = "Erro ao inserir resposta";
+    if (error instanceof Error) {
+      errorMessage += error.message;
+    } else {
+      errorMessage += JSON.stringify(error);
+    }
+    console.error(errorMessage);
+    return reply.status(500).send({
+      error: "Erro ao inserir resposta",
+      details: errorMessage,
+    });
   }
 };
