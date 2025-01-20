@@ -15,7 +15,7 @@ let extrairNumero = (resposta: string): number | null => {
   return isNaN(numero) ? null : numero; // Retorna null se não for um número
 };
 
-let PegandoQuestoes = (
+export const PegandoQuestoes = (
   fk_Questao_id_questao: number,
   respostas_abertas: any,
   usuarioRespostas: any
@@ -95,11 +95,15 @@ let PegandoQuestoes = (
 
 //------------------------TOTAL DURAÇÃO E FREQUÊNCIA--------------------------------
 
-let CaminhadaDuracaoTotal = (Q1C: number, Q2F: number, Q4B: number): number => {
+export const CaminhadaDuracaoTotal = (
+  Q1C: number,
+  Q2F: number,
+  Q4B: number
+): number => {
   return Q1C + Q2F + Q4B;
 };
 
-let CaminhadaFrequenciaTotal = (
+export const CaminhadaFrequenciaTotal = (
   Q1B: number,
   Q2E: number,
   Q4A: number
@@ -107,7 +111,7 @@ let CaminhadaFrequenciaTotal = (
   return Q1B + Q2E + Q4A;
 };
 
-let ModeradaDuracaoTotal = (
+export const ModeradaDuracaoTotal = (
   Q1E: number,
   Q2D: number,
   Q3B: number,
@@ -117,7 +121,7 @@ let ModeradaDuracaoTotal = (
   return Q1E + Q2D + Q3B + Q3D + Q4D;
 };
 
-let ModeradaFrequenciaTotal = (
+export const ModeradaFrequenciaTotal = (
   Q1D: number,
   Q2C: number,
   Q3A: number,
@@ -127,7 +131,7 @@ let ModeradaFrequenciaTotal = (
   return Q1D + Q2C + Q3A + Q3C + Q4C;
 };
 
-let VigorosaDuracaoTotal = (
+export const VigorosaDuracaoTotal = (
   Q1G: number,
   Q2D: number,
   Q3F: number,
@@ -136,7 +140,7 @@ let VigorosaDuracaoTotal = (
   return Q1G + Q2D + Q3F + Q4F;
 };
 
-let VigorosaFrequenciaTotal = (
+export const VigorosaFrequenciaTotal = (
   Q1F: number,
   Q2C: number,
   Q3E: number,

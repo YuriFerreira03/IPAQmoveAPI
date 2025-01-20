@@ -16,6 +16,7 @@ import respostasTotaisSession2Routes from "./routes/respostasTotaisSession2Route
 import respostasTotaisSession3Routes from "./routes/respostasTotaisSession3Routes";
 import respostasTotaisSession4Routes from "./routes/respostasTotaisSession4Routes";
 import respostasDuracaoFrequenciaClassificacaoRoutes from "./routes/respostasDuracaoFrequenciaClassificacaoRoutes";
+import ClassificacaoRoutes from "./routes/classificacaoResumoRoutes";
 import db from "./db/connection";
 
 const server = fastify();
@@ -40,6 +41,7 @@ server.register(respostasTotaisSession2Routes);
 server.register(respostasTotaisSession3Routes);
 server.register(respostasTotaisSession4Routes);
 server.register(respostasDuracaoFrequenciaClassificacaoRoutes);
+server.register(ClassificacaoRoutes);
 
 server.get("/ping", async (request, reply) => {
   return "Lamoia\n";
